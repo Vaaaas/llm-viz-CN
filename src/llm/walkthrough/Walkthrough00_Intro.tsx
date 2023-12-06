@@ -58,9 +58,19 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
 
     setInitialCamera(state, new Vec3(184.744, 0.000, -636.820), new Vec3(296.000, 16.000, 13.500));
 
-    let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! Here we'll explore the model _nano-gpt_, with a mere 85,000 parameters.
+    let c0 = commentary(wt, null, 0)`
+欢迎来到GPT大型语言模型的解析！在这里，我们将探索模型 _nano-gpt_，它只有85,000个参数。
 
-Its goal is a simple one: take a sequence of six letters: ${embed(ExampleInputOutput)}
+它的目标很简单：接收一个由六个字母组成的序列：
+
+Welcome to the walkthrough of the GPT large language model! Here we'll explore the model _nano-gpt_, with a mere 85,000 parameters.
+
+Its goal is a simple one: take a sequence of six letters: 
+
+${embed(ExampleInputOutput)}
+
+，并将它们按字母顺序排序，即变为“ABBBCC”。
+
 and sort them in alphabetical order, i.e. to "ABBBCC".`;
 
     if (c0.t > 0) {
@@ -96,9 +106,18 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     let tokenStr = c_str('_token_', 0, DimStyle.Token);
     let tokenIdxStr = c_str('_token index_', 0, DimStyle.TokenIdx);
 
-    commentary(wt, t6)`We call each of these letters a ${tokenStr}, and the set of the model's different tokens make up its _vocabulary_:${embed(TokenVocab)}
+    commentary(wt, t6)`
+我们将每一个字母称为一个${tokenStr}，模型的不同token集合构成了它的"词汇表"：
 
-    From this table, each token is assigned a number, its ${tokenIdxStr}. And now we can enter this sequence of numbers into the model:${embed(ExampleTokenValues)}\n`;
+We call each of these letters a ${tokenStr}, and the set of the model's different tokens make up its _vocabulary_:
+
+${embed(TokenVocab)}
+
+这个表格中，每个token被分配了一个数字，即它的${tokenIdxStr}。现在我们可以将这一系列数字输入到模型中：
+
+From this table, each token is assigned a number, its ${tokenIdxStr}. And now we can enter this sequence of numbers into the model:
+
+${embed(ExampleTokenValues)}\n`;
     breakAfter();
 
     let t7 = afterTime(null, 1.5, 0.5);
@@ -129,8 +148,17 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
 
     breakAfter();
 
-    let c5 = commentary(wt)`In the 3d view, each green cell represents a number being processed, and each blue cell is a weight. ${embed(GreenBlueCells)}
-    Each number in the sequence first gets turned into a 48 element vector (a size chosen for this particular model). This is called an _embedding_.`;
+    let c5 = commentary(wt)`
+    在3D视图中，每个绿色单元格代表正在处理的数字，每个蓝色单元格是一个权重。
+
+    In the 3d view, each green cell represents a number being processed, and each blue cell is a weight. 
+    
+    ${embed(GreenBlueCells)}
+
+    序列中的每个数字首先被转换成一个48元素的向量（这个大小是为这个特定模型选择的）。这称为"嵌入"。
+
+    Each number in the sequence first gets turned into a 48 element vector (a size chosen for this particular model). This is called an _embedding_.
+    `;
     breakAfter(c5);
 
     {
@@ -166,7 +194,9 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     }
 
     breakAfter();
-    commentary(wt)`The embedding is then passed through the model, going through a series of layers, called transformers, before reaching the bottom.`;
+    commentary(wt)`然后嵌入被传递通过模型，经过一系列层，称为变换器，最后到达底部。
+
+    The embedding is then passed through the model, going through a series of layers, called transformers, before reaching the bottom.`;
     breakAfter();
 
     {
@@ -220,10 +250,14 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
         }
     }
 
-    commentary(wt)`So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
+    commentary(wt)`那么输出是什么呢？是序列中下一个token的预测。因此，在第六个位置，我们得到了下一个token将是'A'、'B'或'C'的概率。
+
+    So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
         going to be 'A', 'B', or 'C'.`
 
-    commentary(wt)`In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
+    commentary(wt)`在这种情况下，模型非常确定下一个token将是'A'。现在，我们可以将这个预测重新输入到模型的顶部，并重复整个过程。
+
+    In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
     the entire process.`;
 
     breakAfter();

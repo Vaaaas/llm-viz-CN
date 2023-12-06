@@ -23,6 +23,19 @@ export function walkthrough07_Mlp(args: IWalkthroughArgs) {
     wt.dimHighlightBlocks = [block.ln2.lnResid, block.mlpAct, block.mlpFc, block.mlpFcBias, block.mlpFcWeight, block.mlpProjBias, block.mlpProjWeight, block.mlpResult, block.mlpResidual];
 
     commentary(wt)`
+在自注意力之后，Transformer的下一部分是多层感知器（multi-layer perceptron, MLP）。这个名字有点拗口，但在这里它是一个简单的两层神经网络。
+
+像自注意力一样，在向量进入MLP之前，我们进行一次${c_blockRef('层归一化', block.ln2.lnResid)}。
+
+在MLP中，将每个长度为${c_dimRef('C = 48', DimStyle.C)}的列向量（独立地）做如下处理：
+
+1. 一个${c_blockRef('线性变换', block.mlpFcWeight)}，并加上一个${c_blockRef('偏置', block.mlpFcBias)}，变成一个长度为${c_dimRef('4 * C', DimStyle.C4)}的向量。
+
+2. 一个GELU激活函数（逐元素应用）
+
+3. 一个${c_blockRef('线性变换', block.mlpProjWeight)}，并加上一个${c_blockRef('偏置', block.mlpProjBias)}，再次变回一个长度为${c_dimRef('C', DimStyle.C)}的向量
+
+让我们追踪其中一个向量：
 
 The next half of the transformer block, after the self-attention, is the MLP (multi-layer
 perceptron). A bit of a mouthful, but here it's a simple neural network with two layers.
@@ -46,6 +59,8 @@ Let's track one of those vectors:
     breakAfter();
 
 commentary(wt)`
+我们首先进行矩阵-向量乘法并加上偏置，将向量扩展到长度${c_dimRef('4 * C', DimStyle.C4)}。（注意，在这里输出矩阵是转置的。这纯粹是为了可视化。）
+
 We first run through the matrix-vector multiplication with bias added, expanding the vector to length ${c_dimRef('4 * C', DimStyle.C4)}. (Note that the output matrix is transposed here.
 This is purely for vizualization purposes.)
 `;
@@ -56,6 +71,8 @@ This is purely for vizualization purposes.)
     breakAfter();
 
 commentary(wt)`
+接下来，我们对向量的每个元素应用GELU激活函数。这是任何神经网络的关键部分，在这里我们为模型引入了一些非线性。所使用的函数GELU，看起来很像ReLU函数（${<code>max(0, x)</code>}），但它有一个平滑的曲线而不是尖锐的角。
+
 Next, we apply the GELU activation function to each element of the vector. This is a key part of any neural network, where we introduce some non-linearity into the model. The specific function used, GELU,
 looks a lot like a ReLU function (computed as ${<code>max(0, x)</code>}), but it has a smooth curve rather than a sharp corner.
 
@@ -69,6 +86,8 @@ ${<ReluGraph />}
     breakAfter();
 
 commentary(wt)`
+然后，我们通过另一个矩阵-向量乘法并加上偏置，将向量投影回长度${c_dimRef('C', DimStyle.C)}。
+
 We then project the vector back down to length ${c_dimRef('C', DimStyle.C)} with another matrix-vector multiplication with bias added.
 `;
     breakAfter();
@@ -78,6 +97,8 @@ We then project the vector back down to length ${c_dimRef('C', DimStyle.C)} with
     breakAfter();
 
 commentary(wt)`
+就像在“自注意力 + 投影”部分一样，我们将MLP的结果逐元素地加到其输入上。
+
 Like in the self-attention + projection section, we add the result of the MLP to its input, element-wise.
 `;
     breakAfter();
@@ -86,6 +107,8 @@ Like in the self-attention + projection section, we add the result of the MLP to
 
     breakAfter();
 commentary(wt)`
+现在，我们可以为输入中的所有列重复这个过程。
+
 We can now repeat this process for all of the columns in the input.`;
 
     breakAfter();
@@ -97,6 +120,8 @@ We can now repeat this process for all of the columns in the input.`;
     breakAfter();
 
 commentary(wt)`
+这样，MLP就完成了。现在我们有了Transformer的输出，它已经准备好传递给下一个块。
+
 And that's the MLP completed. We now have the output of the transformer block, which is ready to be passed to the next block.
 `;
 
