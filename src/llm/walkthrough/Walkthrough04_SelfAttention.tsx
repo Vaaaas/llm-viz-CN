@@ -49,9 +49,9 @@ The self-attention layer is made up of several heads, and we'll focus on one of 
 
     breakAfter();
     commentary(wt)`
-首先要为${c_dimRef('C', DimStyle.C)}列中的每一列从${c_blockRef('标准化输入嵌入矩阵', block0.ln1.lnResid)}生成三个向量。这些向量分别是Q（查询）、K（键）和V（值）向量：
+首先要为${c_dimRef('T', DimStyle.T)}列中的每一列从${c_blockRef('标准化输入嵌入矩阵', block0.ln1.lnResid)}生成三个向量。这些向量分别是Q（查询）、K（键）和V（值）向量：
 
-The first step is to produce three vectors for each of the ${c_dimRef('C', DimStyle.C)} columns from the ${c_blockRef('normalized input embedding matrix', block0.ln1.lnResid)}.
+The first step is to produce three vectors for each of the ${c_dimRef('T', DimStyle.T)} columns from the ${c_blockRef('normalized input embedding matrix', block0.ln1.lnResid)}.
 These vectors are the Q, K, and V vectors:
 
 ${embedInline(<ul>
