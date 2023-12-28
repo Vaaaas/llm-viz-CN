@@ -59,7 +59,7 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
     setInitialCamera(state, new Vec3(184.744, 0.000, -636.820), new Vec3(296.000, 16.000, 13.500));
 
     let c0 = commentary(wt, null, 0)`
-欢迎来到GPT大型语言模型的解析！在这里，我们将探索模型 _nano-gpt_，它只有85,000个参数。
+这里是GPT大语言模型的解析，我们将探索模型 _nano-gpt_，它只有85,000个参数。
 
 它的目标很简单：接收一个由六个字母组成的序列：
 
@@ -69,7 +69,7 @@ Its goal is a simple one: take a sequence of six letters:
 
 ${embed(ExampleInputOutput)}
 
-，并将它们按字母顺序排序，即变为“ABBBCC”。
+并将它们按字母顺序排序，即变为“ABBBCC”。
 
 and sort them in alphabetical order, i.e. to "ABBBCC".`;
 
@@ -155,7 +155,7 @@ ${embed(ExampleTokenValues)}\n`;
     
     ${embed(GreenBlueCells)}
 
-    序列中的每个数字首先被转换成一个48元素的向量（这个大小是为这个特定模型选择的）。这称为"嵌入"。
+    序列中的每个数字首先被转换成一个48元素的向量（这个大小是为这个特定模型选择的）。这称为"嵌入"（_embedding_）。
 
     Each number in the sequence first gets turned into a 48 element vector (a size chosen for this particular model). This is called an _embedding_.
     `;
@@ -194,7 +194,7 @@ ${embed(ExampleTokenValues)}\n`;
     }
 
     breakAfter();
-    commentary(wt)`然后嵌入被传递通过模型，经过一系列层，称为变换器，最后到达底部。
+    commentary(wt)`然后，嵌入向量被输入到模型中，在到达底层之前会依次通过一系列称为Transformer的层。
 
     The embedding is then passed through the model, going through a series of layers, called transformers, before reaching the bottom.`;
     breakAfter();
@@ -255,7 +255,7 @@ ${embed(ExampleTokenValues)}\n`;
     So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
         going to be 'A', 'B', or 'C'.`
 
-    commentary(wt)`在这种情况下，模型非常确定下一个token将是'A'。现在，我们可以将这个预测重新输入到模型的顶部，并重复整个过程。
+    commentary(wt)`在这种情况下，模型非常确信下一个token会是'A'。现在，我们可以将这一预测结果回馈至模型顶层，并重复整个过程。
 
     In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
     the entire process.`;

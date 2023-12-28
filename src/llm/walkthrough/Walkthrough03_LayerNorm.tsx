@@ -26,7 +26,7 @@ export function walkthrough03_LayerNorm(args: IWalkthroughArgs) {
 
 在前一节中的${c_blockRef('输入嵌入', state.layout.residual0)}矩阵是我们第一个Transformer块的输入。
 
-Transformer块的第一步是对这个矩阵应用"层归一化"(layer normalization)。这是一个单独规范化矩阵中每一列值的操作。
+Transformer块的第一步是对这个矩阵应用"层规范化"(layer normalization)。这是一个单独规范化矩阵中每一列值的操作。
 
 The  ${c_blockRef('_input embedding_', state.layout.residual0)} matrix from the previous section is the input to our first Transformer block.
 
@@ -42,7 +42,7 @@ operation that normalizes the values in each column of the matrix separately.
 
     breakAfter();
     commentary(wt)`
-在深度神经网络的训练中，归一化是一个重要的步骤，它有助于提高模型在训练过程中的稳定性。
+在深度神经网络的训练中，规范化是一个重要的步骤，它有助于提高模型在训练过程中的稳定性。
 
 我们可以分别考虑每一列，所以现在让我们专注于第4列（${c_dimRef('t = 3', DimStyle.T)}）。
 
@@ -77,7 +77,7 @@ we find both of these quantities (${c_blockRef('mean (\u03bc)', ln.lnAgg1)} & ${
 
 我们在聚合层中计算并存储这些值，因为我们要将它们应用于列中的所有值。
 
-最后，一旦我们得到了归一化的值，我们将列中的每个元素乘以一个学习到的${c_blockRef('权重 (\u03b3)', ln.lnSigma)}，然后加一个${c_blockRef('偏置 (β)', ln.lnMu)}值，从而得到我们的${c_blockRef('归一化值', ln.lnResid)}。
+最后，一旦我们得到了规范化的值，我们将列中的每个元素乘以一个学习到的${c_blockRef('权重 (\u03b3)', ln.lnSigma)}，然后加一个${c_blockRef('偏置 (β)', ln.lnMu)}值，从而得到我们的${c_blockRef('规范化值', ln.lnResid)}。
 
 The notation we use here is E[x] for the average and Var[x] for the variance (of the column of length ${c_dimRef('C', DimStyle.C)}). The
 variance is simply the standard deviation squared. The epsilon term (ε = ${<>1&times;10<sup>-5</sup></>}) is there to prevent division by zero.
@@ -95,7 +95,7 @@ ${c_blockRef('weight (\u03b3)', ln.lnSigma)} and then add a ${c_blockRef('bias (
 
     breakAfter();
     commentary(wt)`
-我们对${c_blockRef('输入嵌入矩阵', layout.residual0)}的每一列执行这个归一化操作，结果是${c_blockRef('标准化输入嵌入', ln.lnResid)}，它已经准备好传入自注意力层。
+我们对${c_blockRef('输入嵌入矩阵', layout.residual0)}的每一列执行这个规范化操作，结果是${c_blockRef('标准化输入嵌入', ln.lnResid)}，它已经准备好传入自注意力层。
 
 We run this normalization operation on each column of the ${c_blockRef('input embedding matrix', layout.residual0)}, and the result is
 the ${c_blockRef('normalized input embedding', ln.lnResid)}, which is ready to be passed into the Self-Attention layer.

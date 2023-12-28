@@ -18,7 +18,7 @@ export function walkthrough06_Projection(args: IWalkthroughArgs) {
     let outBlocks = block.heads.map(h => h.vOutBlock);
 
     commentary(wt, null, 0)`
-在自注意力过程之后，我们从每个头得到了输出。这些输出是适当混合的V向量，受到Q和K向量的影响。
+在自注意力过程之后，我们从每个头部获得了输出。这些输出是经过适当混合的V向量，它们受到了Q向量和K向量的影响。
 
 为了组合每个头部的${c_blockRef('输出向量', outBlocks)}，我们简单地将它们堆叠在一起。因此，对于时间${c_dimRef('t = 4', DimStyle.T)}，我们从3个长度为${c_dimRef('A = 16', DimStyle.A)}的向量变成了1个长度为${c_dimRef('C = 48', DimStyle.C)}的向量。
 
@@ -73,7 +73,7 @@ vertical arrow, is called the _residual connection_ or _residual pathway_.
     breakAfter();
 
     commentary(wt)`
-与层归一化一样，残差路径对于在深度神经网络中实现有效学习非常重要。
+与层规范化一样，残差连接对于在深度神经网络中实现有效学习非常重要。
 
 现在我们已经有了自注意力的结果，我们可以将其传递到Transformer的下一部分：前馈网络(feed-forward network)。
 

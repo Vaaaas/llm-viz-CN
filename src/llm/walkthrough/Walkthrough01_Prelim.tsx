@@ -22,17 +22,12 @@ export function walkthrough01_Prelim(args: IWalkthroughArgs) {
 在我们深入研究算法的复杂性之前，让我们先稍微回顾一下。
 
 这个指南侧重于"推理(inference)"，而不是训练，因此只是整个机器学习过程的一小部分。
-在我们的案例中，模型的权重已经过预训练，我们使用推理过程来生成输出。这直接在您的浏览器中运行。
+在我们的案例中，模型的权重已经过预训练，我们使用推理过程来生成输出。
 
 这里展示的模型属于GPT（生成预训练Transformer）家族，可以被描述为“基于上下文的token预测器”。
 OpenAI在2018年推出了这个家族，其中著名的成员包括GPT-2、GPT-3和GPT-3.5 Turbo，后者是广泛使用的ChatGPT的基础。
-它也可能与GPT-4有关，但具体细节尚不清楚。
-
-这个指南的灵感来自于${embedLink('minGPT', minGptLink)} GitHub项目，这是一个由${embedLink('Andrej Karpathy', andrejLink)}创建的在${embedLink('PyTorch', pytorchLink)}中的最小GPT实现。
-他的YouTube系列${embedLink("Neural Networks: Zero to Hero", zeroToHeroLink)}和minGPT项目在创建这个指南时提供了宝贵的资源。这里特色的玩具模型基于minGPT项目中的一个模型。
-
-好的，让我们开始吧！
-
+它与GPT-4同样有关，但GPT-4的具体细节尚不清楚。
+ 
 Before we delve into the algorithm's intricacies, let's take a brief step back.
 
 This guide focuses on _inference_, not training, and as such is only a small part of the entire machine-learning process.

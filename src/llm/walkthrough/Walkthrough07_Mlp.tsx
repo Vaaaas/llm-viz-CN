@@ -25,7 +25,7 @@ export function walkthrough07_Mlp(args: IWalkthroughArgs) {
     commentary(wt)`
 在自注意力之后，Transformer的下一部分是多层感知器（multi-layer perceptron, MLP）。这个名字有点拗口，但在这里它是一个简单的两层神经网络。
 
-像自注意力一样，在向量进入MLP之前，我们进行一次${c_blockRef('层归一化', block.ln2.lnResid)}。
+像自注意力一样，在向量进入MLP之前，我们进行一次${c_blockRef('层规范化', block.ln2.lnResid)}。
 
 在MLP中，将每个长度为${c_dimRef('C = 48', DimStyle.C)}的列向量（独立地）做如下处理：
 

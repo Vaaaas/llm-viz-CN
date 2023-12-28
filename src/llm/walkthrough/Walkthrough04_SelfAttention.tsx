@@ -205,7 +205,7 @@ of the ${c_blockRef('attention matrix', head2.attnMtx)}.
 
 另一个要素是，在我们进行点积之后，我们会除以sqrt(${c_dimRef('A', DimStyle.A)})，其中${c_dimRef('A', DimStyle.A)}是Q/K/V向量的长度。这种缩放是为了防止大数值在下一步的归一化（softmax）中占主导地位。
 
-我们将大部分略过softmax操作（稍后描述）；简而言之，每行都被规范化以使总和为1。
+我们将大部分略过softmax操作（稍后描述）；简而言之，每行都被归一化以使总和为1。
 
 These dot products are a way of measuring the similarity between the two vectors. If they're very
 similar, the dot product will be large. If they're very different, the dot product will be small or
@@ -228,7 +228,7 @@ to 1.
 
     breakAfter();
     commentary(wt)`
-最后，我们可以为我们的列（${c_dimRef('t = 5', DimStyle.T)}）生成输出向量。我们查看${c_blockRef('标准化自注意力矩阵', head2.attnMtxSm)}中的（${c_dimRef('t = 5', DimStyle.T)}）行，对于每个元素，逐元素地乘以其他列的${c_blockRef('V向量', head2.vBlock)}。
+最后，我们可以为列（${c_dimRef('t = 5', DimStyle.T)}）生成输出向量。我们查看${c_blockRef('归一化自注意力矩阵', head2.attnMtxSm)}中的（${c_dimRef('t = 5', DimStyle.T)}）行，对于每个元素，逐元素地乘以其他列的${c_blockRef('V向量', head2.vBlock)}。 
 
 Finally, we can produce the output vector for our column (${c_dimRef('t = 5', DimStyle.T)}). We look at the (${c_dimRef('t = 5', DimStyle.T)}) row of the
 ${c_blockRef('normalized self-attention matrix', head2.attnMtxSm)} and for each element, multiply the corresponding ${c_blockRef('V vector', head2.vBlock)} of the
@@ -247,7 +247,7 @@ other columns element-wise.
 
     breakAfter();
     commentary(wt)`
-然后，我们可以将这些加起来以产生输出向量。因此，输出向量将由得分高的列的V向量主导。
+然后，我们可以将这些加起来以产生输出向量。因此，输出向量将由得分高的列的 V 向量主导。
 
 现在我们已经了解了这个过程，让我们为所有列运行它。
 
@@ -265,7 +265,7 @@ Now we know the process, let's run it for all the columns.
 
     breakAfter();
     commentary(wt)`
-这就是自注意力层中一个头部的处理过程。因此，自注意力的主要目标是每一列都希望从其他列中找到相关信息并提取它们的值，并通过将其_Q_向量与其他列的_K_进行比较来实现这一点。另外加上一个限制，即它只能查看过去的信息。
+这就是自注意力层中一个头部的处理过程。因此，自注意力的主要目标是每一列都希望从其他列中找到相关信息并提取它们的值，并通过将其 _Q_ 向量与其他列的 _K_ 进行比较来实现这一点。另外加上一个限制，即它只能查看过去的信息。
 
 And that's the process for a head of the self-attention layer. So the main goal of self-attention is
 that each column wants to find relevant information from other columns and extract their values, and

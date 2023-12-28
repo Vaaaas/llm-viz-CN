@@ -133,11 +133,11 @@ export const TocDiagram: React.FC<{
     makeEntry(Phase.Intro_Prelim, 'Preliminaries', []);
 
     entryGroups.push({ groupName: 'Components', entries: [] });
-    makeEntry(Phase.Input_Detail_Embedding, 'Embedding', ['tokEmbed', 'posEmbed'], true);
-    makeEntry(Phase.Input_Detail_LayerNorm, 'Layer Norm', ['ln1', 'ln2', 'lnf']);
-    makeEntry(Phase.Input_Detail_SelfAttention, 'Self Attention', ['selfAttend']);
-    makeEntry(Phase.Input_Detail_Projection, 'Projection', ['selfAttend']);
-    makeEntry(Phase.Input_Detail_Mlp, 'MLP', ['feedForward']);
+    makeEntry(Phase.Input_Detail_Embedding, '嵌入 Embedding', ['tokEmbed', 'posEmbed'], true);
+    makeEntry(Phase.Input_Detail_LayerNorm, '层规范化 Layer Norm', ['ln1', 'ln2', 'lnf']);
+    makeEntry(Phase.Input_Detail_SelfAttention, '自注意力 Self Attention', ['selfAttend']);
+    makeEntry(Phase.Input_Detail_Projection, '投影 Projection', ['selfAttend']);
+    makeEntry(Phase.Input_Detail_Mlp, '多层感知器 MLP', ['feedForward']);
     makeEntry(Phase.Input_Detail_Transformer, 'Transformer', ['transformer']);
     makeEntry(Phase.Input_Detail_Softmax, 'Softmax', ['softmaxOut']);
     makeEntry(Phase.Input_Detail_Output, 'Output', ['lnf', 'linear', 'softmaxOut'], true);

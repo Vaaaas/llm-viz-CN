@@ -21,7 +21,7 @@ export function walkthrough02_Embedding(args: IWalkthroughArgs) {
     wt.dimHighlightBlocks = [layout.idxObj, layout.tokEmbedObj, layout.posEmbedObj, layout.residual0];
 
     commentary(wt)`
-我们之前看到了如何使用一个简单的查找表将token映射到一系列整数。这些整数，即${c_blockRef('token索引', state.layout.idxObj, DimStyle.TokenIdx)}，是我们在模型中第一次看到也是唯一一次出现整数。从这里开始，我们使用的是浮点数（小数）。
+我们之前看到了如何使用一个简单的查找表将token映射到一系列整数。这些整数，即${c_blockRef('token索引', state.layout.idxObj, DimStyle.TokenIdx)}，是我们在模型中第一次看到也是唯一一次出现整数。我们从这里开始使用浮点数（小数）。
 
 让我们看看如何使用第4个token（索引3）来生成我们的${c_blockRef('输入嵌入', state.layout.residual0)}的第4列向量。
 
@@ -55,7 +55,7 @@ This produces a column vector of size ${c_dimRef('_C_ = 48', DimStyle.C)}, which
     breakAfter();
 
     commentary(wt)`
-由于我们正在查看第4个位置（t = ${c_dimRef('3', DimStyle.T)}）中的token${c_str('B', DimStyle.Token)}，我们将取${c_blockRef('位置嵌入矩阵', state.layout.posEmbedObj)}的第4列。
+由于我们正在查看第4个位置（t = ${c_dimRef('3', DimStyle.T)}）中的token ${c_str('B', DimStyle.Token)}，我们将取${c_blockRef('位置嵌入矩阵', state.layout.posEmbedObj)}的第4列。
 
 这也产生了一个大小为${c_dimRef('C = 48', DimStyle.C)}的列向量，我们称之为位置嵌入。
 
@@ -105,14 +105,14 @@ We now run this same process for all of the tokens in the input sequence, creati
     breakAfter();
 
     commentary(wt)`
-随时可以将鼠标悬停在${c_blockRef('输入嵌入', state.layout.residual0)}矩阵的各个单元格上，以查看计算及其来源。
+随时可以将鼠标悬停在${c_blockRef('输入嵌入', state.layout.residual0)}矩阵的每个单元格上，以便查看相应的计算过程及其数据来源。
 
 我们看到，对输入序列中的所有token运行这个过程会产生一个大小为${c_dimRef('T', DimStyle.T)} x ${c_dimRef('C', DimStyle.C)}的矩阵。
 这里的${c_dimRef('T', DimStyle.T)}代表${c_dimRef('时间', DimStyle.T)}，即，你可以将序列中后面的令牌视为时间上的后面。
 ${c_dimRef('C', DimStyle.C)}代表${c_dimRef('通道', DimStyle.C)}，但也被称为“特征”、“维度”或“嵌入大小”。这个长度${c_dimRef('C', DimStyle.C)}是模型的几个“超参数”之一，由设计者选择，以在模型大小和性能之间进行权衡。
 
 这个矩阵，我们将其称为${c_blockRef('输入嵌入', state.layout.residual0)}，现在已经准备好通过模型传递。
-这个包含${c_dimRef('T', DimStyle.T)}列，每列长度为${c_dimRef('C', DimStyle.C)}的集合将在整个指南中成为一个熟悉的景象。
+这个包含${c_dimRef('T', DimStyle.T)}列，每列长度为${c_dimRef('C', DimStyle.C)}的集合将会在整个指南中频繁看到。
 
 Feel free to hover over individual cells on the ${c_blockRef('_input embedding_', state.layout.residual0)} matrix to see the computations and their sources.
 
