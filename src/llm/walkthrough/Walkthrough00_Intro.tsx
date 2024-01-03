@@ -59,7 +59,7 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
     setInitialCamera(state, new Vec3(184.744, 0.000, -636.820), new Vec3(296.000, 16.000, 13.500));
 
     let c0 = commentary(wt, null, 0)`
-这里是GPT大语言模型的解析，我们将探索模型 _nano-gpt_，它只有85,000个参数。
+这里是GPT大型语言模型（LLM）结构与运行方式的详细解读。我们将探索 nano-gpt 模型，它只有85,000个参数。
 
 它的目标很简单：接收一个由六个字母组成的序列：
 
@@ -107,7 +107,9 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     let tokenIdxStr = c_str('_token index_', 0, DimStyle.TokenIdx);
 
     commentary(wt, t6)`
-我们将每一个字母称为一个${tokenStr}，模型的不同token集合构成了它的"词汇表"：
+在这个例子中，我们将每一个字母称为一个${tokenStr}。在更大型的模型中，这些token可以包含整个字母表中的所有字母，或者英语中的所有单词。
+
+模型的不同token集合构成了它的"词汇表
 
 We call each of these letters a ${tokenStr}, and the set of the model's different tokens make up its _vocabulary_:
 
@@ -149,13 +151,11 @@ ${embed(ExampleTokenValues)}\n`;
     breakAfter();
 
     let c5 = commentary(wt)`
-    在3D视图中，每个绿色单元格代表正在处理的数字，每个蓝色单元格是一个权重。
-
+    在3D视图中，每个绿色单元格代表模型正在处理的数字，每个蓝色单元格是一个权重。权重都是在模型的训练过程中学习得到的
     In the 3d view, each green cell represents a number being processed, and each blue cell is a weight. 
-    
     ${embed(GreenBlueCells)}
 
-    序列中的每个数字首先被转换成一个48元素的向量（这个大小是为这个特定模型选择的）。这称为"嵌入"（_embedding_）。
+    序列中的每个数字首先被转换成一个48元素的向量（这个长度是模型的几个“超参数”之一，由设计者选择，以在模型大小和性能之间进行权衡。）。这个过程被称为"嵌入"（_embedding_）。
 
     Each number in the sequence first gets turned into a 48 element vector (a size chosen for this particular model). This is called an _embedding_.
     `;
@@ -195,7 +195,7 @@ ${embed(ExampleTokenValues)}\n`;
 
     breakAfter();
     commentary(wt)`然后，嵌入向量被输入到模型中，在到达底层之前会依次通过一系列称为Transformer的层。
-
+    
     The embedding is then passed through the model, going through a series of layers, called transformers, before reaching the bottom.`;
     breakAfter();
 
@@ -254,12 +254,12 @@ ${embed(ExampleTokenValues)}\n`;
 
     So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
         going to be 'A', 'B', or 'C'.`
-
+    
     commentary(wt)`在这种情况下，模型非常确信下一个token会是'A'。现在，我们可以将这一预测结果回馈至模型顶层，并重复整个过程。
 
     In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
     the entire process.`;
-
+    
     breakAfter();
 }
 

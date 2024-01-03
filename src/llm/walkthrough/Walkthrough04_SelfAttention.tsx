@@ -205,7 +205,7 @@ of the ${c_blockRef('attention matrix', head2.attnMtx)}.
 
 另一个要素是，在我们进行点积之后，我们会除以sqrt(${c_dimRef('A', DimStyle.A)})，其中${c_dimRef('A', DimStyle.A)}是Q/K/V向量的长度。这种缩放是为了防止大数值在下一步的归一化（softmax）中占主导地位。
 
-我们将大部分略过softmax操作（稍后描述）；简而言之，每行都被归一化以使总和为1。
+_我们将大部分略过softmax操作（稍后描述）；_简而言之，每行都被归一化以使总和为1。
 
 These dot products are a way of measuring the similarity between the two vectors. If they're very
 similar, the dot product will be large. If they're very different, the dot product will be small or

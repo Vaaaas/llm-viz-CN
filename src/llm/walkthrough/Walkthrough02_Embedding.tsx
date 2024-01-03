@@ -21,10 +21,9 @@ export function walkthrough02_Embedding(args: IWalkthroughArgs) {
     wt.dimHighlightBlocks = [layout.idxObj, layout.tokEmbedObj, layout.posEmbedObj, layout.residual0];
 
     commentary(wt)`
-我们之前看到了如何使用一个简单的查找表将token映射到一系列整数。这些整数，即${c_blockRef('token索引', state.layout.idxObj, DimStyle.TokenIdx)}，是我们在模型中第一次看到也是唯一一次出现整数。我们从这里开始使用浮点数（小数）。
+我们之前看到了如何使用一个简单的查找表将token映射到一系列整数。这些整数，即${c_blockRef('token索引', state.layout.idxObj, DimStyle.TokenIdx)}，是我们在模型中第一次也是唯一一次看到整数。我们从这里开始使用浮点数。
 
-让我们看看如何使用第4个token（索引3）来生成我们的${c_blockRef('输入嵌入', state.layout.residual0)}的第4列向量。
-
+作为例子，让我们看看如何使用第4个token来生成${c_blockRef('输入嵌入', state.layout.residual0)}的第4列向量。
 We saw previously how the tokens are mapped to a sequence of integers using a simple lookup table.
 These integers, the ${c_blockRef('_token indices_', state.layout.idxObj, DimStyle.TokenIdx)}, are the first and only time we see integers in the model.
 From here on out, we're using floats (decimal numbers).
@@ -70,7 +69,7 @@ This also produces a column vector of size ${c_dimRef('_C_ = 48', DimStyle.C)}, 
     breakAfter();
 
     commentary(wt)`
-注意，这些位置和token嵌入都是在训练过程中学习得到的（由蓝色表示）。
+_注意，这些位置和token嵌入都是在训练过程中学习得到的（由蓝色表示）。_
 
 现在我们得到了这两个列向量，我们只需将它们相加，以产生另一个大小为${c_dimRef('C = 48', DimStyle.C)}的列向量。
 
@@ -105,14 +104,14 @@ We now run this same process for all of the tokens in the input sequence, creati
     breakAfter();
 
     commentary(wt)`
-随时可以将鼠标悬停在${c_blockRef('输入嵌入', state.layout.residual0)}矩阵的每个单元格上，以便查看相应的计算过程及其数据来源。
+_随时可以将鼠标悬停在_${c_blockRef('_输入嵌入_', state.layout.residual0)}_矩阵的每个单元格上，以便查看相应的计算过程及其数据来源。_
 
 我们看到，对输入序列中的所有token运行这个过程会产生一个大小为${c_dimRef('T', DimStyle.T)} x ${c_dimRef('C', DimStyle.C)}的矩阵。
 这里的${c_dimRef('T', DimStyle.T)}代表${c_dimRef('时间', DimStyle.T)}，即，你可以将序列中后面的token视为时间上的后面。
-${c_dimRef('C', DimStyle.C)}代表${c_dimRef('通道', DimStyle.C)}，但也被称为“特征”、“维度”或“嵌入大小”。这个长度${c_dimRef('C', DimStyle.C)}是模型的几个“超参数”之一，由设计者选择，以在模型大小和性能之间进行权衡。
+${c_dimRef('C', DimStyle.C)}代表${c_dimRef('通道', DimStyle.C)}，但也被称为“特征”、“维度”或“嵌入大小”。
 
 这个矩阵，我们将其称为${c_blockRef('输入嵌入', state.layout.residual0)}，现在已经准备好通过模型传递。
-这个包含${c_dimRef('T', DimStyle.T)}列，每列长度为${c_dimRef('C', DimStyle.C)}的集合将会在整个指南中频繁看到。
+这个包含${c_dimRef('T', DimStyle.T)}列，每列长度为${c_dimRef('C', DimStyle.C)}的矩阵将会在整个指南中频繁看到。
 
 Feel free to hover over individual cells on the ${c_blockRef('_input embedding_', state.layout.residual0)} matrix to see the computations and their sources.
 

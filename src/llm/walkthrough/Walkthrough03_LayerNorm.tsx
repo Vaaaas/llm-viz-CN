@@ -44,7 +44,7 @@ operation that normalizes the values in each column of the matrix separately.
     commentary(wt)`
 _在深度神经网络的训练中，规范化是一个重要的步骤，它有助于提高模型在训练过程中的稳定性。_
 
-我们可以分别考虑每一列，所以现在让我们专注于第4列（${c_dimRef('t = 3', DimStyle.T)}）。
+我们可以分别考虑每一列，现在仍然以第4列（${c_dimRef('t = 3', DimStyle.T)}）为例。
 
 Normalization is an important step in the training of deep neural networks, and it helps improve the
 stability of the model during training.
@@ -73,7 +73,9 @@ we find both of these quantities (${c_blockRef('mean (\u03bc)', ln.lnAgg1)} & ${
 
     breakAfter();
     commentary(wt)`
-我们在这里使用 E[x] 表示平均值，Var[x] 表示方差（对于长度为${c_dimRef('C', DimStyle.C)}的列）。方差简单来说就是标准差的平方。ε项（ε = ${<>1×10<sup>-5</sup></>}）是为了防止除以零。
+_我们在这里使用 E[x] 表示平均值，Var[x] 表示方差（对于长度为_${c_dimRef('C', DimStyle.C)}_的列）。方差简单来说就是标准差的平方。_
+
+ε项（ε = ${<>1×10<sup>-5</sup></>}）是为了防止除以零。
 
 我们在聚合层中计算并存储这些值，因为我们要将它们应用于列中的所有值。
 
