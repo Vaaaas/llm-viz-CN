@@ -108,7 +108,7 @@ We now run this same process for all of the tokens in the input sequence, creati
 随时可以将鼠标悬停在${c_blockRef('输入嵌入', state.layout.residual0)}矩阵的每个单元格上，以便查看相应的计算过程及其数据来源。
 
 我们看到，对输入序列中的所有token运行这个过程会产生一个大小为${c_dimRef('T', DimStyle.T)} x ${c_dimRef('C', DimStyle.C)}的矩阵。
-这里的${c_dimRef('T', DimStyle.T)}代表${c_dimRef('时间', DimStyle.T)}，即，你可以将序列中后面的令牌视为时间上的后面。
+这里的${c_dimRef('T', DimStyle.T)}代表${c_dimRef('时间', DimStyle.T)}，即，你可以将序列中后面的token视为时间上的后面。
 ${c_dimRef('C', DimStyle.C)}代表${c_dimRef('通道', DimStyle.C)}，但也被称为“特征”、“维度”或“嵌入大小”。这个长度${c_dimRef('C', DimStyle.C)}是模型的几个“超参数”之一，由设计者选择，以在模型大小和性能之间进行权衡。
 
 这个矩阵，我们将其称为${c_blockRef('输入嵌入', state.layout.residual0)}，现在已经准备好通过模型传递。

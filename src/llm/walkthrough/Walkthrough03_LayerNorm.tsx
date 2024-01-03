@@ -42,7 +42,7 @@ operation that normalizes the values in each column of the matrix separately.
 
     breakAfter();
     commentary(wt)`
-在深度神经网络的训练中，规范化是一个重要的步骤，它有助于提高模型在训练过程中的稳定性。
+_在深度神经网络的训练中，规范化是一个重要的步骤，它有助于提高模型在训练过程中的稳定性。_
 
 我们可以分别考虑每一列，所以现在让我们专注于第4列（${c_dimRef('t = 3', DimStyle.T)}）。
 
